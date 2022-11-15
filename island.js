@@ -52,6 +52,41 @@ function countIslands(matrix) {
   return count;
 }
 
+
+
+//Alternative using recursion
+
+var numIslands = function(grid) {
+    let islandCount = 0;
+    
+    for (let gridRow in grid) {
+        for (let gridCol in grid[gridRow]) {
+            //Check Something
+            if (grid[gridRow][gridCol] === '1') {
+                //Do Something
+                islandCount++;
+                terraform(parseInt(gridRow), parseInt(gridCol), grid);
+            }
+        }
+    }
+    console.log(grid)
+    return islandCount;
+    
+};
+
+
+const terraform = (gridRow, gridCol, grid) => {
+    if (grid[gridRow] === undefined || grid[gridRow][gridCol] === undefined || grid[gridRow][gridCol] === '0') return;
+    grid[gridRow][gridCol] = '0';
+    terraform(gridRow+1, gridCol, grid)
+    terraform(gridRow-1, gridCol, grid)
+    terraform(gridRow, gridCol+1, grid)
+    terraform(gridRow, gridCol-1, grid)
+    
+};
+
+
+
 // Uncomment the lines below for local testing
 // const matrix = [
 //                 [1,1,1,0,0],
